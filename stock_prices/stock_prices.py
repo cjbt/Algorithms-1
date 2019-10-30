@@ -6,6 +6,7 @@ import argparse
 def find_max_profit(prices):
     max_profit = float("-inf")
     for i in range(0, len(prices)):
+        # takes current index
         for j in range(i + 1, len(prices)):
             if prices[j] - prices[i] > max_profit:
                 max_profit = prices[j] - prices[i]
