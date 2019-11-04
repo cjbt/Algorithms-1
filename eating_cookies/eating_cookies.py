@@ -6,53 +6,101 @@ import sys
 # a solution that is more efficient than the naive
 # recursive solution
 
+cache = {
 
-def eating_cookies(n, cache=None):
-    if n <= 0:
-        return 1
-    return eating_cookies(n - 1)
-# 1, 1
-# 2, 2
-# 3, 4
+}
+def eating_cookies(n, cache=cache):
+    if n < 0:
+        return 0
+    elif n == 0:
+        return 1 # true => value now at 1
+    elif n in cache:
+        return cache[n]
+    else:
+        result = eating_cookies(n - 1, cache) + eating_cookies(n - 2, cache) + eating_cookies(n - 3, cache)
+        cache[n] = result
+        print(cache)
+        return result
+
+print(eating_cookies(3))
 
 
 """
-1 - 
-1 cookie 1 time/all cookies
+one
+1 cookie
 
-2-
-1 cookie then 1 cookie
-2 coookies 1 time
+two
+1 cookie + 1 cookie
+2 coookies
 
-3 - 
-1 cookie 3 times
-1 cookies then 2 cookies
-2 cookies then 1 cookie
-3 cookies 1 time
+three
+1 cookie + 1 cookie + 1 cookie
+2 cookies + 1 cookie
+1 cookies + 2 cookies
+3 cookies
 
-4-
-1 cookie 4 times
-1 cookie then 3 cookies
-1 cookie then 2 cookies then 1 cookie
-1 cookie then 1 cookie then 2 cookies
-2 cookies then 2 cookies
-2 cookies then 1 cookie then 1 cookie
-3 cookies then 1 cookie
+four
+1 cookie + 1 cookie + 1 cookie + 1 cookie
+2 cookies + 1 cookie + 1 cookie
+1 cookie + 2 cookies + 1 cookie
+3 cookies + 1 cookie
+1 cookie + 1 cookie + 2 cookies
+2 cookies + 2 cookies
+1 cookie + 3 cookies
 
-5 - 
-1 cookie 5 times
-1 cookie then 1 cookie then 3 cookies
-1 cookie then 3 cookies then 1 cookie
-1 cookie then 2 cookie then 2 cookie
-1 cookie then 1 cookie then 1 cookie then 2 cookie
-1 cookie then 1 cookie then 2 cookies then 1 cookie
-1 cookie then 2 cookies then 1 cookie then 1 cookie
-2 cookies then 3 cookies
-2 cookies then 1 cookies then 2 cookies
-2 cookies then 2 cookies then 1 cookies
-2 cookies then 1 cookie then 1 cookie then 1 cookie
-3 cookies then 2 cookies
-3 cookies then 1 cooke then 1 cookie
+
+========
+
+if n > 3: n + 1, n + 2, n + 3
+else: n, n + 1, n + 2
+
+add n and minus 1 to it,
+add 
+
+==========
+
+five
+1 cookie + 1 cookie + 1 cookie + 1 cookie + 1 cookie
+1 cookie + 2 cookies + 1 cookie + 1 cookie
+2 cookies + 1 cookie + 1 cookie + 1 cookie
+3 cookies + 1 cookie + 1 cookie
+1 cookie + 1 cookie + 2 cookies + 1 cookie
+2 cookies + 2 cookies + 1 cookie
+1 cookie + 3 cookies + 1 cookie
+1 cookie + 1 cookie + 1 cookie + 2 cookie
+1 cookies + 2 cookies +  2 cookie
+2 cookies + 1 cookie + 2 cookie
+3 cookies + 2 cookie
+1 cookie + 1 cookie + 3 cookie
+2 coookies + 3 cookie
+
+six
+
+1 cookie + 1 cookie + 1 cookie + 1 cookie + 1 cookie + 1 cookie 
+1 cookie + 2 cookies + 1 cookie + 1 cookie + 1 cookie 
+2 cookies + 1 cookie + 1 cookie + 1 cookie + 1 cookie 
+3 cookies + 1 cookie + 1 cookie + 1 cookie 
+1 cookie + 1 cookie + 2 cookies + 1 cookie + 1 cookie 
+2 cookies + 2 cookies + 1 cookie + 1 cookie 
+1 cookie + 3 cookies + 1 cookie + 1 cookie 
+1 cookie + 1 cookie + 1 cookie + 2 cookie + 1 cookie 
+1 cookies + 2 cookies +  2 cookie + 1 cookie 
+2 cookies + 1 cookie + 2 cookie + 1 cookie 
+3 cookies + 2 cookie + 1 cookie 
+1 cookie + 1 cookie + 3 cookie + 1 cookie 
+2 coookies + 3 cookie + 1 cookie
+1 cookie + 1 cookie + 1 cookie + 1 cookie + 2 cookies
+2 cookies + 1 cookie + 1 cookie + 2 cookies
+1 cookie + 2 cookies + 1 cookie + 2 cookies
+3 cookies + 1 cookie + 2 cookies
+1 cookie + 1 cookie + 2 cookies + 2 cookies
+2 cookies + 2 cookies + 2 cookies
+1 cookie + 3 cookies + 2 cookies
+1 cookie + 1 cookie + 1 cookie + 3 cookies
+2 cookies + 1 cookie + 3 cookies
+1 cookies + 2 cookies + 3 cookies
+3 cookies + 3 cookies
+
 """
 
 
